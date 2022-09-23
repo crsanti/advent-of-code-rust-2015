@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -e
+
+module_template_path="templates/module.rs"
+doc_template_path="templates/module.md"
+
+if [ -z "$1" ]; then
+  echo "Argument is required for day" >&2
+  exit 1
+fi
+
+day=$(sed 's/^0*//' <<< "$1")
+day_padded=$(printf %02d "$day")
+module_path="src/bin/${day_padded}.rs"
+doc_path="src/docs/${day_padded}.md"
+input_path="src/inputs/${day_padded}.txt"
+example_path="src/examples/${day_padded}.txt"
+
+cat $module_template_path | sed -e "s/DAYNUM/$day/" > $module_path
+cat $doc_template_path | sed -e "s/DAYNUM/$day/" > $doc_path
+echo "Created module '$module_path'"
+
+touch $input_path
+echo "Created empty input file '$input_path'"
+
+touch $example_path
+echo "Created empty example file '$example_path'"
+
+touch $doc_path
+echo "Created document file '$doc_path'"
+
+echo "Type 'cargo run --bin ${filename} <part_num>' to run your solution"
