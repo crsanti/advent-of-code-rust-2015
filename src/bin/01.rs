@@ -53,3 +53,63 @@ fn main() {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn part1_example1() {
+        assert_eq!(part_one("(())"), 0);
+    }
+
+    #[test]
+    fn part1_example2() {
+        assert_eq!(part_one("()()"), 0);
+    }
+
+    #[test]
+    fn part1_example3() {
+        assert_eq!(part_one("((("), 3);
+    }
+
+    #[test]
+    fn part1_example4() {
+        assert_eq!(part_one("(()(()("), 3);
+    }
+
+    #[test]
+    fn part1_example5() {
+        assert_eq!(part_one("))((((("), 3);
+    }
+
+    #[test]
+    fn part1_example6() {
+        assert_eq!(part_one("())"), -1);
+    }
+
+    #[test]
+    fn part1_example7() {
+        assert_eq!(part_one("))("), -1);
+    }
+
+    #[test]
+    fn part1_example8() {
+        assert_eq!(part_one(")))"), -3);
+    }
+
+    #[test]
+    fn part1_example9() {
+        assert_eq!(part_one(")())())"), -3);
+    }
+
+    #[test]
+    fn part2_example1() {
+        assert_eq!(part_two(")"), 1);
+    }
+
+    #[test]
+    fn part2_example2() {
+        assert_eq!(part_two("()())"), 5);
+    }
+}
